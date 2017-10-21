@@ -9,15 +9,21 @@ class MainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self,title = "Scrapy Spiders")
         grid = Gtk.Grid()
+        self.UrlLabel = Gtk.Label("Url:")
+        self.DomainLabel = Gtk.Label("Domain:")
         self.InputUrl = Gtk.Entry()
+        self.InputDomain = Gtk.Entry()
         self.GoSpiders = Gtk.Button(label = "Send Spiders")
         self.GoSpiders.connect("clicked", self.GoSpiders_Clicked)
         #show where spider has gone
         self.Status = Gtk.ListBox.new()
         
         grid.add(self.InputUrl)
+        grid.attach_next_to(self.InputDomain,self.InputUrl,Gtk.PositionType.BOTTOM,1,1)
+        grid.attach_next_to(self.UrlLabel,self.InputUrl,Gtk.PositionType.LEFT,1,1)
+        grid.attach_next_to(self.DomainLabel,self.InputDomain,Gtk.PositionType.LEFT,1,1)
         grid.attach_next_to(self.GoSpiders,self.InputUrl,Gtk.PositionType.RIGHT,1,1)
-        grid.attach_next_to(self.Status,self.InputUrl,Gtk.PositionType.BOTTOM,2,1)
+        grid.attach_next_to(self.Status,self.InputDomain,Gtk.PositionType.BOTTOM,2,1)
         self.add(grid)
         row = Gtk.ListBoxRow()
         testLabel = Gtk.Label("test")
