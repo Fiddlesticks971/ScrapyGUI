@@ -1,16 +1,14 @@
 import gi
 gi.require_version('Gtk','3.0')
 from gi.repository import Gtk
-import scrapy
+import GenSpider 
+
 
 class MainWindow(Gtk.Window):
     
     def __init__(self):
         Gtk.Window.__init__(self,title = "Scrapy Spiders")
         grid = Gtk.Grid()
-        #setup basic Spider
-        #self.spiders = scrapy.Spider()
-        #self.spiders.name = "quotes"
         self.InputUrl = Gtk.Entry()
         self.GoSpiders = Gtk.Button(label = "Send Spiders")
         self.GoSpiders.connect("clicked", self.GoSpiders_Clicked)
@@ -27,7 +25,12 @@ class MainWindow(Gtk.Window):
         self.Status.add(row)
         
     def GoSpiders_Clicked(self,widget):
-        #self.spiders.Request( url = self.InputUrl.get_text(), callback = self.parse )
+        
+        #setup basic Spider
+        self.name = "bob"
+        self.target = 'https://www.google.com'
+        self.domain = 'google.com'
+        self.spider = GenSpider.Spider(self.name,self.target,self.domain)
         print("go spider")
         
     def parse(self,response):
