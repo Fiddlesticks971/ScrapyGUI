@@ -2,6 +2,8 @@ import gi
 gi.require_version('Gtk','3.0')
 from gi.repository import Gtk
 import GenSpider 
+import scrapy
+from scrapy.crawler import CrawlerProcess
 
 
 class MainWindow(Gtk.Window):
@@ -36,8 +38,11 @@ class MainWindow(Gtk.Window):
         self.name = "bob"
         self.target = 'https://www.google.com'
         self.domain = 'google.com'
-        self.spider = GenSpider.Spider(self.name,self.target,self.domain)
-        print("go spider")
+        self.spider = GenSpider.MySpider()#self.name,self.target,self.domain)
+        process = CrawlerProcess({'USER_AGENT':'Mozilla/4.0 (compatible; MSIE 7.0, Windows NT 5.1)'})
+        process.crawl(self.spider)
+        ###process.start()
+        
         
     def parse(self,response):
         page = response.url.split("/")[-2]

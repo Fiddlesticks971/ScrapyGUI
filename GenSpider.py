@@ -3,15 +3,14 @@ from scrapy.http import Request
 from scrapy.selector import Selector
 from scrapy.spiders import Spider
 
-class Spider(Spider):
+class MySpider(Spider):
     
-    def __init__(self,_name,_target,_domain):
-        print(_name)
-        print(_target)
-        print(_domain)
-        self.domain = _domain
-        self.name = _name
-        self.start_urls= [_target]
+    name = "AutoSpider"
+    
+    def __init__(self):
+    
+        self.domain = "google.com"
+        self.start_urls= ["https://www.google.com"]
         
     def parse(self,response):
         print('go spider')
